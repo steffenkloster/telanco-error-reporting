@@ -47,7 +47,7 @@ mongoose
 			res.json({});
 		});
 
-		app.listen(5000, async () => {
-			console.log("Server has started!");
+		app.listen(5001, async () => {
+			console.log("Server has started! (5001)");
 		});
 	});
