@@ -4,6 +4,8 @@ const session = require('express-session');
 const mongoose = require("mongoose");
 const TError = require ('./models/TError');
 
+const port = Number(process.env.PORT || '3000');
+
 mongoose
 	.connect(global.process.env.NODE_ENV === 'production' ? 'mongodb://root:mongo@srv-captain--mongo/telanco?authSource=admin' : 'mongodb://localhost:27017/telanco', { useNewUrlParser: true })
 	.then(() => {
@@ -47,7 +49,7 @@ mongoose
 			res.json({});
 		});
 
-		app.listen(5001, async () => {
-			console.log("Server has started! (5001)");
+		app.listen(port, async () => {
+			console.log(`Listening on port ${port}!`);
 		});
 	});
