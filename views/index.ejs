@@ -1,0 +1,72 @@
+<% console.log(errors); %>
+<html>
+    <head>
+        <title lang="title">Telanco Fejl</title>
+        <style>
+            table {
+                font-family: Arial, Helvetica, sans-serif;
+                border-collapse: collapse;
+                width: 100%;
+            }
+
+            table td, table th {
+                border: 1px solid #ddd;
+                padding: 8px;
+            }
+
+            table tr:nth-child(even){background-color: #f2f2f2;}
+
+            table tr:hover {background-color: #ddd;}
+
+            table th {
+                padding-top: 12px;
+                padding-bottom: 12px;
+                text-align: left;
+                background-color: #04AA6D;
+                color: white;
+            }
+
+            .hidden {
+                display: none;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="site">
+            <table>
+                <tr>
+                    <th>_id</th>
+                    <th>website</th>
+                    <th>tags</th>
+                    <th>ip</th>
+                    <th>filename</th>
+                    <th>errorType</th>
+                    <th>errorMessage</th>
+                    <th>stackTrace</th>
+                </tr>
+                
+            <% errors.forEach(err => { 
+                let err1 = "";
+                let err2 = err.filename;
+
+                if(!err.filename.startsWith('http://')) {
+                    let split = err.filename.split('/')
+                    err2 = split.pop();
+                    err1 = split.join('/');
+                }
+            %>
+                <tr>
+                    <td><%= err._id %></td>
+                    <td><%= err.website %></td>
+                    <td><%= err.tags.toString() %></td>
+                    <td><%= err.ip %></td>
+                    <td onclick="this.querySelector('span').classList.toggle('hidden');"><span class="hidden"><%= err1 %>/</span><span><%= err2 %></span></td>
+                    <td><%= err.errorType %></td>
+                    <td><%= err.errorMessage %></td>
+                    <td><%= err.stackTrace ?? 'null' %></td>
+                </tr>
+            <% }); %>
+            </table>
+        </div>
+    </body>
+</html>
