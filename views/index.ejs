@@ -47,22 +47,22 @@
                 
             <% errors.forEach(err => { 
                 let err1 = "";
-                let err2 = err.filename;
+                let err2 = err.filename ?? 'null';
 
-                if(!err.filename.startsWith('http://')) {
+                if(err.filename && !err.filename.startsWith('http://')) {
                     let split = err.filename.split('/')
                     err2 = split.pop();
                     err1 = split.join('/');
                 }
             %>
                 <tr>
-                    <td><%= err._id %></td>
-                    <td><%= err.website %></td>
-                    <td><%= err.tags.toString() %></td>
-                    <td><%= err.ip %></td>
+                    <td><%= err._id ?? 'null' %></td>
+                    <td><%= err.website ?? 'null' %></td>
+                    <td><%= err.tags ? err.tags.toString() : 'null' %></td>
+                    <td><%= err.ip ?? 'null' %></td>
                     <td onclick="this.querySelector('span').classList.toggle('hidden');"><span class="hidden"><%= err1 %>/</span><span><%= err2 %></span></td>
-                    <td><%= err.errorType %></td>
-                    <td><%= err.errorMessage %></td>
+                    <td><%= err.errorType ?? 'null' %></td>
+                    <td><%= err.errorMessage ?? 'null' %></td>
                     <td><%= err.stackTrace ?? 'null' %></td>
                 </tr>
             <% }); %>
