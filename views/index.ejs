@@ -36,6 +36,7 @@
             <table>
                 <tr>
                     <th>_id</th>
+                    <th>date</th>
                     <th>website</th>
                     <th>tags</th>
                     <th>ip</th>
@@ -57,6 +58,7 @@
             %>
                 <tr>
                     <td><%= err._id ?? 'null' %></td>
+                    <td><%= err.date?.toString() ?? 'null' %></td>
                     <td><%= err.website ?? 'null' %></td>
                     <td><%= err.tags ? err.tags.toString() : 'null' %></td>
                     <td><%= err.ip ?? 'null' %></td>
