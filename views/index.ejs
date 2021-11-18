@@ -1,4 +1,3 @@
-<% console.log(errors); %>
 <html>
     <head>
         <title lang="title">Telanco Fejl</title>
@@ -29,24 +28,28 @@
             .hidden {
                 display: none;
             }
+
+            .font-0 {
+                font-size: 0;
+            }
         </style>
     </head>
     <body>
         <div class="site">
             <table>
                 <tr>
-                    <th>_id</th>
-                    <th>date</th>
-                    <th>website</th>
-                    <th>tags</th>
-                    <th>ip</th>
-                    <th>filename</th>
-                    <th>errorType</th>
-                    <th>errorMessage</th>
-                    <th>stackTrace</th>
+                    <th onclick="document.querySelectorAll('.err-id').forEach(el => el.classList.toggle('font-0'));">_id</th>
+                    <th onclick="document.querySelectorAll('.err-date').forEach(el => el.classList.toggle('font-0'));">date</th>
+                    <th onclick="document.querySelectorAll('.err-website').forEach(el => el.classList.toggle('font-0'));">website</th>
+                    <th onclick="document.querySelectorAll('.err-tags').forEach(el => el.classList.toggle('font-0'));">tags</th>
+                    <th onclick="document.querySelectorAll('.err-ip').forEach(el => el.classList.toggle('font-0'));">ip</th>
+                    <th onclick="document.querySelectorAll('.err-filename').forEach(el => el.classList.toggle('font-0'));">filename</th>
+                    <th onclick="document.querySelectorAll('.err-type').forEach(el => el.classList.toggle('font-0'));">errorType</th>
+                    <th onclick="document.querySelectorAll('.err-message').forEach(el => el.classList.toggle('font-0'));">errorMessage</th>
+                    <th onclick="document.querySelectorAll('.err-stack').forEach(el => el.classList.toggle('font-0'));">stackTrace</th>
                 </tr>
                 
-            <% errors.forEach(err => { 
+            <% errors.reverse().forEach(err => { 
                 let err1 = "";
                 let err2 = err.filename ?? 'null';
 
@@ -57,15 +60,15 @@
                 }
             %>
                 <tr>
-                    <td><%= err._id ?? 'null' %></td>
-                    <td><%= err.date?.toString() ?? 'null' %></td>
-                    <td><%= err.website ?? 'null' %></td>
-                    <td><%= err.tags ? err.tags.toString() : 'null' %></td>
-                    <td><%= err.ip ?? 'null' %></td>
-                    <td onclick="this.querySelector('span').classList.toggle('hidden');"><span class="hidden"><%= err1 %>/</span><span><%= err2 %></span></td>
-                    <td><%= err.errorType ?? 'null' %></td>
-                    <td><%= err.errorMessage ?? 'null' %></td>
-                    <td><%= err.stackTrace ?? 'null' %></td>
+                    <td class="err-id font-0"><%= err._id ?? 'null' %></td>
+                    <td class="err-date"><%= err.date ? ('' + err.date.getFullYear() + '-' + (err.date.getMonth() + 1 > 9 ? err.date.getMonth() + 1 : '0' + (err.date.getMonth() + 1)) + '-' + (err.date.getDate() > 9 ? err.date.getDate() : ('0' + err.date.getDate())) + ' ' + (err.date.getHours() > 9 ? err.date.getHours() : ('0' + err.date.getHours())) + ':' + (err.date.getMinutes() > 9 ? err.date.getMinutes() : ('0' + err.date.getMinutes())))  : 'null' %></td>
+                    <td class="err-website"><%= err.website ?? 'null' %></td>
+                    <td class="err-tags font-0"><%= err.tags ? err.tags.toString() : 'null' %></td>
+                    <td class="err-ip font-0"><%= err.ip ?? 'null' %></td>
+                    <td class="err-filename" onclick="this.querySelector('span').classList.toggle('hidden');"><span class="hidden"><%= err1 %>/</span><span><%= err2 %></span></td>
+                    <td class="err-type"><%= err.errorType ?? 'null' %></td>
+                    <td class="err-message"><%= err.errorMessage ?? 'null' %></td>
+                    <td class="err-stack font-0"><%= err.stackTrace ?? 'null' %></td>
                 </tr>
             <% }); %>
             </table>
