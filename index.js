@@ -25,7 +25,7 @@ mongoose
 		});
 
 		app.get('/', async function(req, res) {
-			res.status(404).json({error: 404});
+			res.send('Hello World!');
 		});
 
 		app.get('/view-secret-url-1389920', async function(req, res) {
