@@ -53,7 +53,7 @@
                 let err1 = "";
                 let err2 = err.filename ?? 'null';
 
-                if(err.filename && !err.filename.startsWith('http://')) {
+                if(err.filename) {
                     let split = err.filename.split('/')
                     err2 = split.pop();
                     err1 = split.join('/');
