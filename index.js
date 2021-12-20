@@ -44,6 +44,11 @@ mongoose
 
 				return res.status(400).json({});
 			}
+
+			if(req.body.error.errorMessage.includes('jQuery is not defined') || req.body.errorMessage.includes('$ is not defined') || req.body.errorMessage.includes('find variable: $')) {
+				console.log(`Ignoring error: ${req.body.error.errorMessage}`);
+				return res.json({});
+			}
 			
 			TError.newError(req, req.body.error);
 			res.json({});
