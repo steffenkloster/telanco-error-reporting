@@ -35,6 +35,11 @@ mongoose
 			res.render('index', { req, errors });
 		});
 
+		app.post('/view-secret-url-1389920/delete', async function(req, res) {
+			await TError.deleteAll();
+			res.json({});
+		});
+
 		app.post('/report', async function(req, res) {
 			if(!req.body.error) {
 				TError.newError(req, {

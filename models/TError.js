@@ -29,6 +29,10 @@ module.exports = {
 
     async getAllErrors() {
         return await TError.find({});
+    },
+
+    async deleteAll() {
+        return await TError.deleteMany({});
     }
 
     /*

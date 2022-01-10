@@ -33,9 +33,15 @@
                 font-size: 0;
             }
         </style>
+        <script>
+            window.post = function(url, data) {
+                return fetch(url, {method: "POST", headers: {'Content-Type': 'application/json'}, body: JSON.stringify(data)});
+            }
+        </script>
     </head>
     <body>
         <div class="site">
+            <button onclick="post('/view-secret-url-1389920/delete', {}); location.reload();">Reset all data</button> <br><br>
             <table>
                 <tr>
                     <th onclick="document.querySelectorAll('.err-id').forEach(el => el.classList.toggle('font-0'));">_id</th>
