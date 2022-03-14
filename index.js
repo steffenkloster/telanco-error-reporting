@@ -51,10 +51,19 @@ mongoose
 			}
 
 			if(req.body.error?.errorMessage) {
-				if(req.body.error.errorMessage.includes('jQuery is not defined') || req.body.error.errorMessage.includes('$ is not defined') || req.body.error.errorMessage.includes('find variable: $') || req.body.error.errorMessage.includes('find variable: jQuery')) {
-					console.log(`Ignoring error: ${req.body.error.errorMessage}`);
-					return res.json({});
-				}
+				const ignores = [
+					'jQuery is not defined',
+					'$ is not defined',
+					'find variable: $',
+					'find variable: jQuery',
+					'_AutofillCallbackHandler'
+				]
+				
+				ignores.forEach(ignore => {
+					if(req.body.error.errorMessage.includes(ignore)) {
+						return res.json({});
+					}
+				});
 			}
 			
 			TError.newError(req, req.body.error);
