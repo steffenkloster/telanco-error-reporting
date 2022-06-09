@@ -50,6 +50,7 @@ mongoose
                 return res.status(400).json({});
             }
 
+            let ignore = false;
             if (req.body.error?.errorMessage) {
                 const ignores = [
                     'jQuery is not defined',
@@ -58,18 +59,26 @@ mongoose
                     'find variable: jQuery',
                     '_AutofillCallbackHandler',
                     'Read error',
-                    'errno=21'
-                ]
+                    'errno=21',
+                    'getimagesize'
+                ];
 
                 ignores.forEach(ignore => {
+                    if (ignore) {
+                        return;
+                    }
+
                     if (req.body.error.errorMessage.includes(ignore)) {
-                        console.log(`Ignoring message: ${req.body.error.errorMessage}`)
-                        return res.json({});
+                        console.log(`Ignoring message: ${req.body.error.errorMessage}`);
+                        ignore = true;
                     }
                 });
             }
 
-            TError.newError(req, req.body.error);
+            if (!ignore) {
+                TError.newError(req, req.body.error);
+            }
+
             res.json({});
         });
 
