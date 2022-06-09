@@ -50,7 +50,7 @@ mongoose
                 return res.status(400).json({});
             }
 
-            let ignore = false;
+            let ignoreError = false;
             if (req.body.error?.errorMessage) {
                 const ignores = [
                     'jQuery is not defined',
@@ -64,18 +64,18 @@ mongoose
                 ];
 
                 ignores.forEach(ignore => {
-                    if (ignore) {
+                    if (ignoreError) {
                         return;
                     }
 
                     if (req.body.error.errorMessage.includes(ignore)) {
                         console.log(`Ignoring message: ${req.body.error.errorMessage}`);
-                        ignore = true;
+                        ignoreError = true;
                     }
                 });
             }
 
-            if (!ignore) {
+            if (!ignoreError) {
                 TError.newError(req, req.body.error);
             }
 
