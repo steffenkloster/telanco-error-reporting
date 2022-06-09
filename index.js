@@ -69,7 +69,7 @@ mongoose
                     }
 
                     if (req.body.error.errorMessage.includes(ignore)) {
-                        console.log(`Ignoring message: ${req.body.error.errorMessage}`);
+                        console.log(`Ignoring message: ${req.body.error.errorMessage} (${req.body.error.website})`);
                         ignoreError = true;
                     }
                 });
