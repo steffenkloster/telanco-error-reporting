@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const tErrorSchema = mongoose.Schema({
-	date: {
+    date: {
         type: Date,
         default: () => Date.now()
     },
@@ -16,7 +16,8 @@ const tErrorSchema = mongoose.Schema({
         default: 'ERROR'
     },
     errorMessage: String,
-    stackTrace: String
+    stackTrace: String,
+    userAgent: String
 });
 
 const TError = mongoose.model('TError', tErrorSchema);
