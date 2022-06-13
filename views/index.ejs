@@ -1,60 +1,83 @@
 <html>
-    <head>
-        <title lang="title">Telanco Fejl</title>
-        <style>
-            table {
-                font-family: Arial, Helvetica, sans-serif;
-                border-collapse: collapse;
-                width: 100%;
-            }
 
-            table td, table th {
-                border: 1px solid #ddd;
-                padding: 8px;
-            }
+<head>
+    <title lang="title">Telanco Fejl</title>
+    <style>
+        table {
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+            max-width: 100%;
+        }
 
-            table tr:nth-child(even){background-color: #f2f2f2;}
+        table td,
+        table th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
 
-            table tr:hover {background-color: #ddd;}
+        table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
 
-            table th {
-                padding-top: 12px;
-                padding-bottom: 12px;
-                text-align: left;
-                background-color: #04AA6D;
-                color: white;
-            }
+        table tr:hover {
+            background-color: #ddd;
+        }
 
-            .hidden {
-                display: none;
-            }
+        table th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #04AA6D;
+            color: white;
+        }
 
-            .font-0 {
-                font-size: 0;
-            }
-        </style>
-        <script>
+        .hidden {
+            display: none;
+        }
+
+        .font-0 {
+            font-size: 0;
+        }
+
+        td {
+            word-break: break-all;
+        }
+    </style>
+    <script>
             window.post = function(url, data) {
                 return fetch(url, {method: "POST", headers: {'Content-Type': 'application/json'}, body: JSON.stringify(data)});
             }
         </script>
-    </head>
-    <body>
-        <div class="site">
-            <button onclick="post('/view-secret-url-1389920/delete', {}); location.reload();">Reset all data</button> <br><br>
-            <table>
-                <tr>
-                    <th onclick="document.querySelectorAll('.err-id').forEach(el => el.classList.toggle('font-0'));">_id</th>
-                    <th onclick="document.querySelectorAll('.err-date').forEach(el => el.classList.toggle('font-0'));">date</th>
-                    <th onclick="document.querySelectorAll('.err-website').forEach(el => el.classList.toggle('font-0'));">website</th>
-                    <th onclick="document.querySelectorAll('.err-tags').forEach(el => el.classList.toggle('font-0'));">tags</th>
-                    <th onclick="document.querySelectorAll('.err-ip').forEach(el => el.classList.toggle('font-0'));">ip</th>
-                    <th onclick="document.querySelectorAll('.err-filename').forEach(el => el.classList.toggle('font-0'));">filename</th>
-                    <th onclick="document.querySelectorAll('.err-type').forEach(el => el.classList.toggle('font-0'));">errorType</th>
-                    <th onclick="document.querySelectorAll('.err-message').forEach(el => el.classList.toggle('font-0'));">errorMessage</th>
-                    <th onclick="document.querySelectorAll('.err-stack').forEach(el => el.classList.toggle('font-0'));">stackTrace</th>
-                </tr>
-                
+</head>
+
+<body>
+    <div class="site">
+        <button onclick="post('/view-secret-url-1389920/delete', {}); location.reload();">Reset all data</button>
+        <br><br>
+        <table>
+            <tr>
+                <th onclick="document.querySelectorAll('.err-id').forEach(el => el.classList.toggle('font-0'));">_id
+                </th>
+                <th onclick="document.querySelectorAll('.err-date').forEach(el => el.classList.toggle('font-0'));">date
+                </th>
+                <th onclick="document.querySelectorAll('.err-website').forEach(el => el.classList.toggle('font-0'));">
+                    website</th>
+                <th onclick="document.querySelectorAll('.err-tags').forEach(el => el.classList.toggle('font-0'));">tags
+                </th>
+                <th onclick="document.querySelectorAll('.err-ip').forEach(el => el.classList.toggle('font-0'));">ip</th>
+                <th onclick="document.querySelectorAll('.err-filename').forEach(el => el.classList.toggle('font-0'));">
+                    filename</th>
+                <th onclick="document.querySelectorAll('.err-type').forEach(el => el.classList.toggle('font-0'));">
+                    errorType</th>
+                <th onclick="document.querySelectorAll('.err-message').forEach(el => el.classList.toggle('font-0'));">
+                    errorMessage</th>
+                <th onclick="document.querySelectorAll('.err-useragent').forEach(el => el.classList.toggle('font-0'));">
+                    userAgent</th>
+                <th onclick="document.querySelectorAll('.err-stack').forEach(el => el.classList.toggle('font-0'));">
+                    stackTrace</th>
+            </tr>
+
             <% errors.reverse().forEach(err => { 
                 let err1 = "";
                 let err2 = err.filename ?? 'null';
@@ -74,6 +97,7 @@
                     <td class="err-filename" onclick="this.querySelector('span').classList.toggle('hidden');"><span class="hidden"><%= err1 %>/</span><span><%= err2 %></span></td>
                     <td class="err-type"><%= err.errorType ?? 'null' %></td>
                     <td class="err-message"><%= err.errorMessage ?? 'null' %></td>
+                    <td class="err-useragent"><%= err.userAgent ?? 'null' %></td>
                     <td class="err-stack font-0"><%= err.stackTrace ?? 'null' %></td>
                 </tr>
             <% }); %>
