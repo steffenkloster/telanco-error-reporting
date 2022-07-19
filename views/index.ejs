@@ -98,7 +98,7 @@
                     <td class="err-date"><%= err.date ? ('' + err.date.getFullYear() + '-' + (err.date.getMonth() + 1 > 9 ? err.date.getMonth() + 1 : '0' + (err.date.getMonth() + 1)) + '-' + (err.date.getDate() > 9 ? err.date.getDate() : ('0' + err.date.getDate())) + ' ' + (err.date.getHours() > 9 ? err.date.getHours() : ('0' + err.date.getHours())) + ':' + (err.date.getMinutes() > 9 ? err.date.getMinutes() : ('0' + err.date.getMinutes())))  : 'null' %></td>
                     <td class="err-website"><%= err.website ?? 'null' %></td>
                     <td class="err-tags font-0"><%= err.tags ? err.tags.toString() : 'null' %></td>
-                    <td class="err-ip font-0"><%= err.ip ?? 'null' %> <%= "(" + err.countryCode ?? + ")" '' %></td>
+                    <td class="err-ip font-0"><%= err.ip ?? 'null' %> [<%= err.countryCode ?? '' %>]</td>
                     <td class="err-filename" onclick="this.querySelector('span').classList.toggle('hidden');"><span class="hidden"><%= err1 %>/</span><span><%= err2 %></span></td>
                     <td class="err-type"><%= err.errorType ?? 'null' %></td>
                     <td class="err-message"><%= err.errorMessage ?? 'null' %></td>

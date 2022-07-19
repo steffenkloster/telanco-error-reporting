@@ -3,7 +3,6 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const mongoose = require("mongoose");
 const TError = require('./models/TError');
-const axios = require('axios');
 
 const port = Number(process.env.PORT || '3000');
 
