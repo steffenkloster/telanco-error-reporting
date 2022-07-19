@@ -17,7 +17,8 @@ const tErrorSchema = mongoose.Schema({
     },
     errorMessage: String,
     stackTrace: String,
-    userAgent: String
+    userAgent: String,
+    countryCode: String
 });
 
 const TError = mongoose.model('TError', tErrorSchema);
@@ -25,6 +26,10 @@ const TError = mongoose.model('TError', tErrorSchema);
 module.exports = {
     async newError(req, err) {
         err.ip = req.headers['cf-connecting-ip'] || req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+        const res = await axios.get('http://ip-api.com/json/' + err.ip);
+        const resJson = await res.json();
+        err.countryCode = resJson.countryCode;
+
         return await new TError(err).save();
     },
 
